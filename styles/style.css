@@ -1,0 +1,37 @@
+@font-face {
+  font-family: "VCR";
+  src: local("VCROSDMono"), url("/fonts/vcr_osd_mono/VCR_OSD_MONO_1.001.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "LAZER";
+  src: local("Lazer"), url("/fonts/basicLAZER.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "RetroSignature";
+  src: local("RetroSignature"), url("/fonts/retro-signature-font/RetroSignature-2ODoK.otf") format("opentype");
+}
+
+body {
+  font-family: "RetroSignature";
+}
+
+.main {
+  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5)), url('/assets/background.jpg');
+}
+
+.banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), white;
+}
+
+.bannerImg {
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/assets/OliverS_retro_80s_shoes_with_black_background_13dbaeb2-d8b4-4079-b678-4260e3961030.png');
+  min-width: 500px;
+  min-height: 500px;
+  background-size: contain;
+}
+
+/* .banner {
+  height:
+} */
