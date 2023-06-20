@@ -6,12 +6,17 @@ import Image from 'next/image';
 const Products = ({ type }) => {
 	const [search, setSearch] = useState('');
 	const [products, setProducts] = useState([]);
+	const [cartItems, setCartItems] = useState([]);
+	const [addedToCart, setAddedToCart] = useState('');
 
 	useEffect(() => {
+		const typeOfProduct = type;
 		const fetchProducts = async () => {
 			try {
 				const response = await fetch(
-					`/api/product${type && `?type=${type}`}`,
+					`/api/product${
+						typeOfProduct && `?type=${typeOfProduct}`
+					}`,
 					{
 						method: 'GET',
 						headers: { 'Cache-Control': 'no-store' },
@@ -26,7 +31,7 @@ const Products = ({ type }) => {
 		};
 
 		fetchProducts();
-	}, []);
+	}, [type]);
 
 	// useEffect(() => {
 	// 	console.log('PRODUCTS => ', products);
@@ -44,6 +49,35 @@ const Products = ({ type }) => {
 				regexSearch.exec(product.type)
 		);
 	};
+
+	// Function to handle adding items to the cart
+	const handleAddToCart = async product => {
+		try {
+			const response = await fetch('/api/cart/new', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(product),
+			});
+
+			if (response.ok) {
+				console.log('Item added to cart');
+				// Handle any additional logic or state updates
+			} else {
+				console.error(
+					'Failed to add item to cart:',
+					response.status
+				);
+			}
+		} catch (error) {
+			console.error('Failed to add item to cart:', error);
+		}
+	};
+
+	// useEffect(() => {
+	// 	console.log('CART ITEMS', cartItems);
+	// }, [cartItems]);
 
 	return (
 		<div className='pt-32 h-screen container mx-auto flex flex-col gap-10 items-center'>
@@ -72,16 +106,25 @@ const Products = ({ type }) => {
 							{product.signature}{' '}
 						</p>
 						<div className='flex gap-2 items-end mt-5'>
-							<p className='pl-1 w-36 bg-black flex gap-2 cursor-pointer hover:translate-y-[-2px] transition-transform duration-100 ease-in-out'>
-								Add to cart{' '}
-								<Image
-									width={20}
-									height={20}
-									src='/icons/cart.svg'
-									alt='cart'
-									className='mr-2'
-								/>
-							</p>
+							<button
+								onClick={() => handleAddToCart(product)}
+								className='pl-1 w-36 h-6 bg-black flex items-center gap-2 cursor-pointer hover:translate-y-[-2px] transition-transform duration-100 ease-in-out'>
+								{product._id !== addedToCart ? (
+									<>
+										Add to cart{' '}
+										<Image
+											width={20}
+											height={20}
+											src='/icons/cart.svg'
+											alt='cart'
+											className='mr-2'
+										/>
+									</>
+								) : (
+									<>Added!</>
+								)}
+							</button>
+
 							<div className='flex flex-col gap-1 h-14 justify-end w-16'>
 								{type === 'Shoes' && (
 									<del className='text-black font-vcr text-base flex px-1'>
@@ -102,6 +145,9 @@ const Products = ({ type }) => {
 					</div>
 				))}
 			</div>
+			<button onClick={() => localStorage.clear()}>
+				Clear Local Storage
+			</button>
 		</div>
 	);
 };

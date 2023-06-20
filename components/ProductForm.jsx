@@ -23,10 +23,6 @@ const ProductForm = () => {
 		price: '',
 	});
 
-	useEffect(() => {
-		console.log('PRODUCT DATA => ', productData);
-	}, [productData]);
-
 	const handleImageChange = event => {
 		const file = event.target.files[0];
 		convertImageToBase64(file);

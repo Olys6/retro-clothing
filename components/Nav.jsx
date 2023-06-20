@@ -38,6 +38,7 @@ const Nav = () => {
 					alt='80s retro clothing brand logo'
 					width={60}
 					height={60}
+					priority
 					className='rounded-full'
 				/>
 				<p className='text-3xl font-lazer'>
@@ -129,10 +130,10 @@ const Nav = () => {
 					className='bg-black rounded-full w-12 p-2 relative hover:translate-y-[-2px] transition-transform duration-100 ease-in-out'>
 					<Image
 						src='/icons/cart.svg'
-						alt=''
+						alt='cart'
 						width={36}
 						height={36}
-						className=''
+						className='w-auto h-auto'
 					/>
 					{cart.length > 0 ? (
 						<div className='absolute top-0 right-0 bg-red-500 w-3.5 h-3.5 rounded-full text-xs flex items-center justify-center text-white'>
