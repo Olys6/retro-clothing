@@ -22,3 +22,7 @@ body {
       transparent,
       rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
+
+.dropdownItem {
+  @apply bg-white text-black px-2 text-right cursor-pointer hover:translate-y-[-2px] transition-transform duration-100 ease-in-out
+}

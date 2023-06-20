@@ -14,7 +14,7 @@
 }
 
 body {
-  font-family: "RetroSignature";
+  font-family: "VCR";
 }
 
 .main {
@@ -26,12 +26,19 @@ body {
 }
 
 .bannerImg {
-  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/assets/OliverS_retro_80s_shoes_with_black_background_13dbaeb2-d8b4-4079-b678-4260e3961030.png');
-  min-width: 500px;
-  min-height: 500px;
-  background-size: contain;
+  background: linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.0)), url('/assets/OliverS_retro_80s_shoes_with_black_background_13dbaeb2-d8b4-4079-b678-4260e3961030.png');
+  background-color: white;
+  /* min-width: 50%; */
+  min-height: 33.333333vw;
+  background-size: 90%;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* border-radius: 50%; */
 }
 
-/* .banner {
-  height:
-} */
+@media screen and (max-width: 768px) {
+  .bannerImg {
+    min-height: 100vw;
+    min-width: 100%;
+  }
+}
