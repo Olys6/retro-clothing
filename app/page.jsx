@@ -27,8 +27,8 @@ export default function Home() {
 				</div>
 			</div>
 
-			<div className='w-full flex justify-center items-center'>
-				<div className='sm:w-4/5 w-full h-64 mt-20 flex justify-center items-center gap-5'>
+			<div className='w-full flex justify-center items-center mt-32'>
+				<div className='sm:w-4/6 w-full h-64 flex justify-center items-center gap-5'>
 					{productTypes.map((item, i) => (
 						<Link
 							href={`/${item.toLowerCase()}s`}

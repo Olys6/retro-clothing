@@ -83,13 +83,13 @@ const Nav = () => {
 											height={17}
 										/>
 									</Link>
-									{/* <Link
+									<Link
 										href='/cart'
 										onClick={() => setTglDropdwn(false)}
 										className='dropdownItem w-28 flex justify-end gap-2 relative'>
 										<p>My Cart</p>
 										<Image
-											src='/icons/cart.svg'
+											src='/icons/cartBlack.svg'
 											alt=''
 											width={20}
 											height={20}
@@ -102,7 +102,7 @@ const Nav = () => {
 										) : (
 											<></>
 										)}
-									</Link> */}
+									</Link>
 									<Link
 										href='/'
 										onClick={() => (
@@ -125,7 +125,7 @@ const Nav = () => {
 						)}
 					</div>
 				) : null}
-				<Link
+				{/* <Link
 					href='/cart'
 					className='bg-black rounded-full w-12 p-2 relative hover:translate-y-[-2px] transition-transform duration-100 ease-in-out'>
 					<Image
@@ -142,7 +142,7 @@ const Nav = () => {
 					) : (
 						<></>
 					)}
-				</Link>
+				</Link> */}
 			</div>
 		</div>
 	);

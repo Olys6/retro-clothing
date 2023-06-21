@@ -2,8 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { useSession } from 'next-auth/react';
 
 const Products = ({ type }) => {
+	const { data: session } = useSession();
 	const [search, setSearch] = useState('');
 	const [products, setProducts] = useState([]);
 	const [cartItems, setCartItems] = useState([]);
@@ -52,13 +54,18 @@ const Products = ({ type }) => {
 
 	// Function to handle adding items to the cart
 	const handleAddToCart = async product => {
+		console.log(session.user);
 		try {
 			const response = await fetch('/api/cart/new', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
 				},
-				body: JSON.stringify(product),
+				body: JSON.stringify({
+					userId: session.user.id, // Replace with the actual user ID
+					productId: product._id,
+					quantity: 1, // You can modify this to add a specific quantity
+				}),
 			});
 
 			if (response.ok) {
@@ -115,7 +122,7 @@ const Products = ({ type }) => {
 										<Image
 											width={20}
 											height={20}
-											src='/icons/cart.svg'
+											src='/icons/cartWhite.svg'
 											alt='cart'
 											className='mr-2'
 										/>
@@ -145,9 +152,6 @@ const Products = ({ type }) => {
 					</div>
 				))}
 			</div>
-			<button onClick={() => localStorage.clear()}>
-				Clear Local Storage
-			</button>
 		</div>
 	);
 };

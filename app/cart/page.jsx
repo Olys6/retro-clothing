@@ -7,24 +7,32 @@ const Cart = () => {
 	const { data: session } = useSession();
 	const [cartItems, setCartItems] = useState([]);
 
-	// Retrieve cart data from local storage on component mount
-	const updateCartItems = () => {
+	// useEffect(() => {
+	// console.log(session.user.email);
+
+	const fetchCartItems = async () => {
 		try {
-			const storedCartItems =
-				localStorage.getItem('cartItems');
-			if (storedCartItems) {
-				setCartItems(JSON.parse(storedCartItems));
+			const response = await fetch(
+				`/api/cart?email=${session?.user?.email}`
+			);
+
+			if (response.ok) {
+				const data = await response.json();
+				console.log('DATA => ', data);
+				setCartItems(data.cartItems);
+			} else {
+				console.error(
+					'Failed to fetch cart items:',
+					response.status
+				);
 			}
 		} catch (error) {
-			// Handle the parsing error
-			console.log('Error parsing cart items:', error);
+			console.error('Failed to fetch cart items:', error);
 		}
-		console.log(cartItems);
 	};
 
-	useEffect(() => {
-		updateCartItems();
-	}, []);
+	// fetchCartItems();
+	// }, [session?.user?.email]);
 
 	return (
 		<div className='pt-32 h-screen container mx-auto'>
@@ -34,14 +42,15 @@ const Cart = () => {
 			</p>
 
 			<div className='w-full flex items-center bg-gray-900'>
-				{cartItems.map((item, index) => (
+				{/* {cartItems.map((item, index) => (
 					<div
 						key={index}
 						className='w-full'>
 						<p>{item.name}</p>
 					</div>
-				))}
+				))} */}
 			</div>
+			<button onClick={fetchCartItems}>Pull Data</button>
 		</div>
 	);
 };
