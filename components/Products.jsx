@@ -70,6 +70,7 @@ const Products = ({ type }) => {
 
 			if (response.ok) {
 				console.log('Item added to cart');
+				setAddedToCart(product._id);
 				// Handle any additional logic or state updates
 			} else {
 				console.error(
@@ -79,6 +80,10 @@ const Products = ({ type }) => {
 			}
 		} catch (error) {
 			console.error('Failed to add item to cart:', error);
+		} finally {
+			setTimeout(() => {
+				setAddedToCart('');
+			}, 1000);
 		}
 	};
 
