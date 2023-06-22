@@ -5,19 +5,23 @@ import { connectToDB } from '@utils/database';
 export const revalidate = 0;
 
 export const GET = async (req, { params }) => {
-	// console.log('REQUEST EMAIL => ', req.url.split('=')[1]);
+	const url = new URL(req.url);
+	const searchParams = url.searchParams;
+	const search = searchParams.get('id') || '';
 	try {
 		await connectToDB();
 
+		console.log(params);
 		// Get the user's email from the request session or query parameters (that's would should be done)
-		const userEmail = req.url.split('?email=')[1];
+		const userId = search;
 
 		// Find the user based on the provided email
 		const user = await User.findOne({
-			email: userEmail,
+			id: userId,
 		}).populate('cart.items.productId');
 
 		if (!user) {
+			// console.log(user);
 			return new Response('User not found', {
 				status: 404,
 			});

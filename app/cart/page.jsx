@@ -12,7 +12,7 @@ const Cart = () => {
 		const fetchCartItems = async () => {
 			try {
 				const response = await fetch(
-					`/api/cart?email=${session?.user.email}`,
+					`/api/cart?id=${session?.user.id}`,
 					{
 						method: 'GET',
 						headers: { 'Cache-Control': 'no-cache' },
@@ -27,10 +27,10 @@ const Cart = () => {
 			}
 		};
 
-		if (session?.user?.email) {
+		if (session?.user.id) {
 			fetchCartItems();
 		}
-	}, [session?.user?.email]);
+	}, [session?.user.id]);
 
 	const handleItemDelete = async itemId => {
 		try {
