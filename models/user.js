@@ -1,4 +1,4 @@
-import { Schema, model, models } from 'mongoose';
+import mongoose, { Schema, model, models } from 'mongoose';
 
 const userSchema = new Schema({
 	email: {
@@ -17,7 +17,7 @@ const userSchema = new Schema({
 		items: [
 			{
 				productId: {
-					type: Schema.Types.ObjectId,
+					type: mongoose.Schema.Types.ObjectId,
 					ref: 'Product',
 					required: true,
 				},
