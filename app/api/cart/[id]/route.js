@@ -1,7 +1,11 @@
 import User from '@models/user';
+import Product from '@models/product';
 import { connectToDB } from '@utils/database';
 
 export const DELETE = async (req, { params }) => {
+	const url = new URL(req.url);
+	const searchParams = url.searchParams;
+	const userId = searchParams.get('id') || '';
 	try {
 		await connectToDB();
 
@@ -9,7 +13,7 @@ export const DELETE = async (req, { params }) => {
 
 		// Find the user based on the provided email
 		const user = await User.findOne({
-			email: req.url.split('email=')[1],
+			id: userId,
 		});
 
 		if (!user) {
@@ -45,13 +49,16 @@ export const DELETE = async (req, { params }) => {
 	}
 };
 
-export const PATCH = async (request, { params }) => {
-	const { quantity } = await request.json();
+export const PATCH = async (req, { params }) => {
+	const { quantity } = await req.json();
+	const url = new URL(req.url);
+	const searchParams = url.searchParams;
+	const userId = searchParams.get('id') || '';
 	try {
 		await connectToDB();
 
 		const user = await User.findOne({
-			email: request.url.split('email=')[1],
+			id: userId,
 		});
 
 		if (!user) {
@@ -78,6 +85,7 @@ export const PATCH = async (request, { params }) => {
 			status: 200,
 		});
 	} catch (error) {
+		console.log(error);
 		return new Response('Failed to update cart item', {
 			status: 500,
 		});

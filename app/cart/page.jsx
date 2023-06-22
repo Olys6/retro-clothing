@@ -35,7 +35,7 @@ const Cart = () => {
 	const handleItemDelete = async itemId => {
 		try {
 			const response = await fetch(
-				`/api/cart/${itemId}?email=${session.user.email}`,
+				`/api/cart/${itemId}?id=${session.user.id}`,
 				{
 					method: 'DELETE',
 				}

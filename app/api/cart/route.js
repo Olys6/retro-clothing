@@ -4,16 +4,13 @@ import { connectToDB } from '@utils/database';
 
 export const revalidate = 0;
 
-export const GET = async (req, { params }) => {
+export const GET = async req => {
 	const url = new URL(req.url);
 	const searchParams = url.searchParams;
-	const search = searchParams.get('id') || '';
+	const userId = searchParams.get('id') || '';
 	try {
 		await connectToDB();
-
-		console.log(params);
 		// Get the user's email from the request session or query parameters (that's would should be done)
-		const userId = search;
 
 		// Find the user based on the provided email
 		const user = await User.findOne({
