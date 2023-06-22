@@ -84,7 +84,7 @@ const Nav = () => {
 										/>
 									</Link>
 									<Link
-										href='/cart'
+										href={`/cart?id=${session.user.id}`}
 										onClick={() => setTglDropdwn(false)}
 										className='dropdownItem w-28 flex justify-end gap-2 relative'>
 										<p>My Cart</p>

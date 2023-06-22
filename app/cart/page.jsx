@@ -8,31 +8,30 @@ const Cart = () => {
 	const { data: session } = useSession();
 	const [cartItems, setCartItems] = useState([]);
 
+	const fetchCartItems = async () => {
+		try {
+			const response = await fetch(
+				`/api/cart?email=${session?.user.email}`,
+				{
+					method: 'GET',
+					headers: { 'Cache-Control': 'no-cache' },
+				}
+			);
+
+			const data = await response.json();
+			console.log('DATA => ', data);
+			setCartItems(data);
+		} catch (error) {
+			console.error('Failed to fetch cart items:', error);
+		}
+	};
+
 	useEffect(() => {
 		// console.log(session.user.email);
 
-		const fetchCartItems = async () => {
-			try {
-				const response = await fetch(
-					`/api/cart?email=${session?.user?.email}`
-				);
-
-				if (response.ok) {
-					const data = await response.json();
-					console.log('DATA => ', data);
-					setCartItems(data);
-				} else {
-					console.error(
-						'Failed to fetch cart items:',
-						response.status
-					);
-				}
-			} catch (error) {
-				console.error('Failed to fetch cart items:', error);
-			}
-		};
-
-		fetchCartItems();
+		if (session?.user?.email) {
+			fetchCartItems();
+		}
 	}, [session?.user?.email]);
 
 	const handleItemDelete = async itemId => {
@@ -217,6 +216,9 @@ const Cart = () => {
 				/>{' '}
 				Total: {calculateTotal()}£
 			</p>
+			<button onClick={fetchCartItems}>
+				Pull Cart Data
+			</button>
 		</div>
 	);
 };
