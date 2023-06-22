@@ -54,7 +54,6 @@ const Products = ({ type }) => {
 
 	// Function to handle adding items to the cart
 	const handleAddToCart = async product => {
-		console.log(session.user);
 		try {
 			const response = await fetch('/api/cart/new', {
 				method: 'POST',
@@ -103,18 +102,20 @@ const Products = ({ type }) => {
 				{filteredProducts()?.map(product => (
 					<div
 						key={product._id}
-						className='bg-white p-3 relative'>
-						<div className='text-black flex justify-between'>
-							<p>{product.title} </p>
+						className='bg-white p-3 relative w-60 flex flex-col items-left'>
+						<p className='w-full text-black h-12'>
+							{product.title}{' '}
+						</p>
+						<div className='w-full flex justify-center'>
+							<Image
+								src={product.image}
+								alt={product.title}
+								width={200}
+								height={200}
+							/>
 						</div>
-						<Image
-							src={product.image}
-							alt={product.title}
-							width={200}
-							height={200}
-						/>
 
-						<p className='text-black font-retroSign text-5xl flex justify-between items-center pr-2 absolute bottom-8'>
+						<p className='text-black font-retroSign text-5xl flex justify-between items-center pr-2 absolute bottom-9'>
 							{product.signature}{' '}
 						</p>
 						<div className='flex gap-2 items-end mt-5'>
@@ -140,17 +141,17 @@ const Products = ({ type }) => {
 							<div className='flex flex-col gap-1 h-14 justify-end w-16'>
 								{type === 'Shoes' && (
 									<del className='text-black font-vcr text-base flex px-1'>
-										{product.price}£
+										£{product.price}
 									</del>
 								)}
 								<p className='text-white bg-red-500 font-vcr text-base flex justify-center px-1'>
+									£
 									{type === 'Shoes'
 										? (
 												product.price -
 												product.price * 0.7
 										  ).toFixed()
 										: product.price}
-									£
 								</p>
 							</div>
 						</div>

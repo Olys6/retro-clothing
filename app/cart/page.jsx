@@ -20,7 +20,7 @@ const Cart = () => {
 				);
 
 				const data = await response.json();
-				console.log('DATA => ', data);
+				// console.log('DATA => ', data);
 				setCartItems(data);
 			} catch (error) {
 				console.error('Failed to fetch cart items:', error);
@@ -145,13 +145,13 @@ const Cart = () => {
 							<p className='text-xl flex items-center gap-2'>
 								{item.productId.title}{' '}
 								<span className='bg-red-500 text-white w-fit px-1 text-base'>
+									£
 									{item.productId.type !== 'Shoes'
 										? item.productId.price * item.quantity
 										: (
 												item.productId.price -
 												item.productId.price * 0.7
 										  ).toFixed() * item.quantity}
-									£
 								</span>
 								{item.productId.type === 'Shoes' && (
 									<del className='text-base flex'>
