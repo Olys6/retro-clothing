@@ -5,8 +5,13 @@ import { connectToDB } from '@utils/database';
 export const DELETE = async (req, { params }) => {
 	const url = new URL(req.url);
 	const searchParams = url.searchParams;
-	const userId = searchParams.get('id') || '';
+	const userId = searchParams.get('id');
 	try {
+		if (!userId) {
+			return new Response('User ID not provided', {
+				status: 400,
+			});
+		}
 		await connectToDB();
 
 		const productId = params.id; // Get the ID of the item to be deleted from the route parameter
@@ -53,8 +58,15 @@ export const PATCH = async (req, { params }) => {
 	const { quantity } = await req.json();
 	const url = new URL(req.url);
 	const searchParams = url.searchParams;
-	const userId = searchParams.get('id') || '';
+	const userId = searchParams.get('id');
+
 	try {
+		if (!userId) {
+			return new Response('User ID not provided', {
+				status: 400,
+			});
+		}
+
 		await connectToDB();
 
 		const user = await User.findOne({

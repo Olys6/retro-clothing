@@ -73,7 +73,7 @@ const Cart = () => {
 	) => {
 		try {
 			const response = await fetch(
-				`/api/cart/${itemId}?id=${session.user.id}`,
+				`/api/cart/${itemId}?id=${session?.user.id}`,
 				{
 					method: 'PATCH',
 					body: JSON.stringify({ quantity: newQuantity }),
@@ -98,6 +98,7 @@ const Cart = () => {
 
 				// Perform any additional actions after item quantity update
 			} else {
+				console.log('HITTING');
 				console.error(
 					'Failed to update item quantity in cart:',
 					response.status
@@ -105,6 +106,7 @@ const Cart = () => {
 				// Handle the error and display an appropriate message to the user
 			}
 		} catch (error) {
+			console.log('HITTING');
 			console.error(
 				'Failed to update item quantity in cart:',
 				error
