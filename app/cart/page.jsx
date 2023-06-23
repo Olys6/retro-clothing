@@ -54,7 +54,8 @@ const Cart = () => {
 			} else {
 				console.error(
 					'Failed to delete item from cart:',
-					response.status
+					response.status,
+					response.statusText
 				);
 				// Handle the error and display an appropriate message to the user
 			}
@@ -71,6 +72,7 @@ const Cart = () => {
 		itemId,
 		newQuantity
 	) => {
+		console.log('ITEM ID => ', itemId);
 		try {
 			const response = await fetch(
 				`/api/cart/${itemId}?id=${session?.user.id}`,
@@ -101,7 +103,8 @@ const Cart = () => {
 				console.log('HITTING');
 				console.error(
 					'Failed to update item quantity in cart:',
-					response.status
+					response.status,
+					response
 				);
 				// Handle the error and display an appropriate message to the user
 			}

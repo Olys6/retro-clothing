@@ -8,6 +8,9 @@ export const DELETE = async (req, { params }) => {
 	const userId = searchParams.get('id');
 	try {
 		if (!userId) {
+			console.log('USER ID => ', userId);
+			console.log('REQ => ', req);
+			console.log('URL => ', url);
 			return new Response('User ID not provided', {
 				status: 400,
 			});
@@ -59,9 +62,13 @@ export const PATCH = async (req, { params }) => {
 	const url = new URL(req.url);
 	const searchParams = url.searchParams;
 	const userId = searchParams.get('id');
-
+	console.log('PARAMS => ', params);
+	console.log('USER ID => ', userId);
 	try {
 		if (!userId) {
+			console.log('USER ID => ', userId);
+			console.log('REQ => ', req);
+			console.log('URL => ', url);
 			return new Response('User ID not provided', {
 				status: 400,
 			});
@@ -69,7 +76,7 @@ export const PATCH = async (req, { params }) => {
 
 		await connectToDB();
 
-		const user = await User.findOne({
+		const user = await User.findById({
 			_id: userId,
 		});
 
