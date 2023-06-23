@@ -7,6 +7,7 @@ export const POST = async request => {
 	try {
 		console.log(userId);
 		const user = await User.findById(userId);
+		console.log('USER ', user);
 
 		if (!user) {
 			return new Response('User not found', {

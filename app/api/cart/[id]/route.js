@@ -13,7 +13,7 @@ export const DELETE = async (req, { params }) => {
 
 		// Find the user based on the provided email
 		const user = await User.findOne({
-			id: userId,
+			_id: userId,
 		});
 
 		if (!user) {
@@ -58,7 +58,7 @@ export const PATCH = async (req, { params }) => {
 		await connectToDB();
 
 		const user = await User.findOne({
-			id: userId,
+			_id: userId,
 		});
 
 		if (!user) {

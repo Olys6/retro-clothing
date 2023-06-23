@@ -10,11 +10,9 @@ export const GET = async req => {
 	const userId = searchParams.get('id') || '';
 	try {
 		await connectToDB();
-		// Get the user's email from the request session or query parameters (that's would should be done)
-
 		// Find the user based on the provided email
 		const user = await User.findOne({
-			id: userId,
+			_id: userId,
 		}).populate('cart.items.productId');
 
 		if (!user) {
