@@ -66,14 +66,14 @@ export const PATCH = async (req, { params }) => {
 	console.log('PARAMS => ', params);
 	console.log('USER ID => ', userId);
 	try {
-		if (!userId) {
-			console.log('USER ID => ', userId);
-			console.log('REQ => ', req);
-			console.log('URL => ', url);
-			return new Response('User ID not provided', {
-				status: 400,
-			});
-		}
+		// if (!userId) {
+		// 	console.log('USER ID => ', userId);
+		// 	console.log('REQ => ', req);
+		// 	console.log('URL => ', url);
+		// 	return new Response('User ID not provided', {
+		// 		status: 400,
+		// 	});
+		// }
 
 		await connectToDB();
 
@@ -89,8 +89,7 @@ export const PATCH = async (req, { params }) => {
 		}
 
 		const cartItemIndex = user.cart.items.findIndex(
-			item =>
-				item._id.toString() === '64953a75dbafe9f3566f5553'
+			item => item._id.toString() === params.id
 		);
 
 		if (cartItemIndex === -1) {
@@ -98,8 +97,6 @@ export const PATCH = async (req, { params }) => {
 				status: 404,
 			});
 		}
-
-		console.log('CART => ', cartItemIndex);
 
 		user.cart.items[cartItemIndex].quantity = quantity;
 
