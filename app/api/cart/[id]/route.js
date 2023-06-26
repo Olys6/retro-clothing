@@ -59,10 +59,10 @@ export const DELETE = async (req, { params }) => {
 };
 
 export const PATCH = async (req, { params }) => {
-	const { quantity } = await req.json();
+	const { quantity, userId } = await req.json();
 	const url = new URL(req.url);
 	const searchParams = url.searchParams;
-	const userId = searchParams.get('id');
+	// const userId = searchParams.get('id');
 	console.log('PARAMS => ', params);
 	console.log('USER ID => ', userId);
 	try {
@@ -78,7 +78,7 @@ export const PATCH = async (req, { params }) => {
 		await connectToDB();
 
 		const user = await User.findById({
-			_id: '6491ab24953b626845a181d4',
+			_id: userId,
 		});
 		console.log('USER => ', user);
 

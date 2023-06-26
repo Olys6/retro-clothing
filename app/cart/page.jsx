@@ -79,7 +79,10 @@ const Cart = () => {
 				`/api/cart/${itemId}?id=${session?.user.id}`,
 				{
 					method: 'PATCH',
-					body: JSON.stringify({ quantity: newQuantity }),
+					body: JSON.stringify({
+						quantity: newQuantity,
+						userId: session.user.id,
+					}),
 					headers: {
 						'Content-Type': 'application/json',
 					},
