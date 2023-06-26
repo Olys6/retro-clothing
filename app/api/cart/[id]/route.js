@@ -78,7 +78,7 @@ export const PATCH = async (req, { params }) => {
 		await connectToDB();
 
 		const user = await User.findById({
-			_id: userId,
+			_id: '6491ab24953b626845a181d4',
 		});
 		console.log('USER => ', user);
 
