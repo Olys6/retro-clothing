@@ -89,7 +89,8 @@ export const PATCH = async (req, { params }) => {
 		}
 
 		const cartItemIndex = user.cart.items.findIndex(
-			item => item._id.toString() === params.id
+			item =>
+				item._id.toString() === '64953a75dbafe9f3566f5553'
 		);
 
 		if (cartItemIndex === -1) {
