@@ -73,6 +73,7 @@ const Cart = () => {
 		newQuantity
 	) => {
 		console.log('ITEM ID => ', itemId);
+		console.log('USER ID => ', session.user.id);
 		try {
 			const response = await fetch(
 				`/api/cart/${itemId}?id=${session?.user.id}`,

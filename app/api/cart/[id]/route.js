@@ -1,5 +1,6 @@
 import User from '@models/user';
 import Product from '@models/product';
+import mongoose from 'mongoose';
 import { connectToDB } from '@utils/database';
 
 export const DELETE = async (req, { params }) => {
@@ -77,8 +78,9 @@ export const PATCH = async (req, { params }) => {
 		await connectToDB();
 
 		const user = await User.findById({
-			_id: userId,
+			_id: '6491ab24953b626845a181d4',
 		});
+		console.log('USER => ', user);
 
 		if (!user) {
 			return new Response('User not found', {
