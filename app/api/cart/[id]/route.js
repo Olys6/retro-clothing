@@ -6,24 +6,22 @@ import { connectToDB } from '@utils/database';
 export const DELETE = async (req, { params }) => {
 	const url = new URL(req.url);
 	const searchParams = url.searchParams;
-	const userId = searchParams.get('id');
+	const userId = searchParams.get('userId');
+	console.log('USER ID => ', userId);
+
 	try {
 		if (!userId) {
-			console.log('USER ID => ', userId);
-			console.log('REQ => ', req);
-			console.log('URL => ', url);
 			return new Response('User ID not provided', {
 				status: 400,
 			});
 		}
+
 		await connectToDB();
 
 		const productId = params.id; // Get the ID of the item to be deleted from the route parameter
 
-		// Find the user based on the provided email
-		const user = await User.findOne({
-			_id: userId,
-		});
+		// Find the user based on the provided user ID
+		const user = await User.findById(userId);
 
 		if (!user) {
 			return new Response('User not found', {
@@ -66,14 +64,14 @@ export const PATCH = async (req, { params }) => {
 	console.log('PARAMS => ', params);
 	console.log('USER ID => ', userId);
 	try {
-		// if (!userId) {
-		// 	console.log('USER ID => ', userId);
-		// 	console.log('REQ => ', req);
-		// 	console.log('URL => ', url);
-		// 	return new Response('User ID not provided', {
-		// 		status: 400,
-		// 	});
-		// }
+		if (!userId) {
+			console.log('USER ID => ', userId);
+			console.log('REQ => ', req);
+			console.log('URL => ', url);
+			return new Response('User ID not provided', {
+				status: 400,
+			});
+		}
 
 		await connectToDB();
 

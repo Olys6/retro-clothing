@@ -36,7 +36,10 @@ const Cart = () => {
 	const handleItemDelete = async itemId => {
 		try {
 			const response = await fetch(
-				`/api/cart/${itemId}?id=${session.user.id}`,
+				`/api/cart/${itemId}?` +
+					new URLSearchParams({
+						userId: session.user.id,
+					}).toString(),
 				{
 					method: 'DELETE',
 				}
